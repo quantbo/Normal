@@ -1,8 +1,17 @@
+a {
+	color: blue;
+	font-weight: normal;
+	text-decoration: none;
+}
+a:hover {
+	color: orange;
+}
 body {
 	margin-left: 2.5%;
 	margin-top: 2%;
+	width: 50%;
 }
-/*
+/* Not currently in use.
 h1 {
 	font-family: sans-serif;
 	font-weight: normal;
@@ -10,6 +19,13 @@ h1 {
 	margin-bottom: 2%;
 }
 */
+#blurb {
+	font-size: 1.3em;
+	font-family: serif;
+	font-weight: 100;
+	margin-left: 5%;
+	margin-right: 5%;
+}
 #boxInner {
 	fill: none;
 	stroke: black;

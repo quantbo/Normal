@@ -4,8 +4,8 @@ An exercise in
 * Drawing graphs.
 * Generating axes.
 * Generating axis labels.
-Plan is to have the axis for the density on the LHS, the axis for the CDF on the RHS.
-Implemented with d3 and jstat.
+Axis for PDF is on LHS, axis for CDF is on RHS.
+Implemented with d3.v4 and jStat.
 -->
 <!DOCTYPE html>
 <html>
@@ -23,6 +23,18 @@ Implemented with d3 and jstat.
 		-->
 		<rect id='boxOuter' height=600 width=800></rect>
 	</svg>
+	<div id='blurb'>
+		<p>This is an exercise in plotting mathematical functions with <a href='https://d3js.org/' target="_blank">D3 v4</a>. The focus on probability functions is somewhat arbitrary, although I do confess to an interest in probability and statistics.</p>
+		<p>The following are the goals of the exerise:</p>
+		<ul>
+			<li>Plot two mathematical functions with different ranges.</li>
+			<li>Generate axes appropriate to each function.</li>
+			<li>Generate axis labels.</li>
+			<li>Produce legible tick labels.</li>
+		</ul>
+		<p>The Normal PDF and CDF are computed with <a href='https://github.com/jstat/jstat' target="_blank">jStat</a>.</p>
+		<p>To view the code for this exercise: <a href='https://github.com/quantbo/Normal' target='_blank'>link</a></p>
+	</div>
 </body>
 <script>
 	var svg = d3.select('svg');
