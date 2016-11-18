@@ -9,3 +9,5 @@ An exercise in
 Axis for the PDF is located on the LHS, the axis for the CDF on the RHS.
 
 Implemented with d3.js and jStat.js.
+
+View the output at: https://quantbo.github.io/Normal/
