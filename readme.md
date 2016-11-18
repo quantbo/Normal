@@ -1,4 +1,4 @@
-#Normal probability density function (PDF) & cumulative distribution function (CDF)
+#Normal probability density function & cumulative distribution function
 
 An exercise in
 
