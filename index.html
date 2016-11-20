@@ -73,7 +73,8 @@ Implemented with d3.v4 and jStat.
 		.domain(d3.extent(theData, function(d) {return d.pdf;}))
 		.range([heightInner, 0]).nice();
 	var yScaleCDF = d3.scaleLinear()
-		.domain(d3.extent(theData, function(d) {return d.cdf;}))
+		//The domain of the CDF is (0, 1).
+		.domain([0, 1])
 		.range([heightInner, 0]).nice();
 		
 	//Define lines.
