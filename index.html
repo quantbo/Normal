@@ -16,113 +16,24 @@ Implemented with d3.v4 and jStat.
 	<script src='https://cdn.jsdelivr.net/jstat/1.5.3/jstat.min.js'></script>
 	<link rel="stylesheet" href="Normal.css">
 	</head>
-<body>
-	<svg height=600 width=800>
-		<!--For development purposes it can help to exhibit a rectangle congruent with the SVG element.
-		Following development it can be made invisible by setting its opacity to 0 in the relevant style.
-		-->
-		<rect id='boxOuter' height=600 width=800></rect>
-	</svg>
-	<div id='blurb'>
-		<p>The following are the goals of the present exerise:</p>
-		<ul>
-			<li>Plot two mathematical functions with different ranges.</li>
-			<li>Generate axes appropriate to each function.</li>
-			<li>Generate axis labels.</li>
-			<li>Produce legible tick labels.</li>
-		</ul>
-		<p>The chart is generated with <a href='https://d3js.org/' target="_blank">D3</a>. The Normal PDF and CDF are computed with <a href='https://github.com/jstat/jstat' target="_blank">jStat</a>.</p>
-		<p>You can view the code for this exercise on <a href='https://github.com/quantbo/Normal' target='_blank'>GitHub</a>.</p>
-	</div>
-</body>
-<script>
-	var svg = d3.select('svg');
-	var height = svg.attr('height'), width = svg.attr('width');
-	//Leave space for axes, axis labels, title.
-	var margin = {top: Math.round(height * 0.10),
-							 right: Math.round(width * 0.15),
-							 bottom: Math.round(height * 0.10),
-							 left: Math.round(width * 0.15)};
-	//Grouping element where graphing takes place.
-	var inner = svg.append('g')
-		.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-	//The dimensions of the graphing area.
-	var heightInner = height - margin.top - margin.bottom,
-			widthInner = width - margin.left - margin.right;
-	//Draw a box congruent with the 'inner' element.
-	var boxInner = inner.append('rect')
-		.attr('id', 'boxInner')
-		.attr('height', heightInner)
-		.attr('width', widthInner);
-	//Generate data; there will be nn + 1 rows of data.
-	var theData = [], nn = 100, begin = -3, end = 3, span = end - begin;
-	for (var ii = 0; ii <= nn;  ++ii) {
-		//The next line avoids buildup of rounding errors in the specification of x values.
-		var x = begin + span * ii / nn;
-		var row = {x: x, pdf: jStat.normal.pdf(x, 0, 1), cdf: jStat.normal.cdf(x, 0, 1)};
-		theData.push(row);
-	}
-
-	//Define scales.
-	var xScale = d3.scaleLinear()
-		.domain(d3.extent(theData, function(d) {return d.x;}))
-		.range([0, widthInner]);
-	//There are y scales for the PDF and CDF.
-	var yScalePDF = d3.scaleLinear()
-		.domain(d3.extent(theData, function(d) {return d.pdf;}))
-		.range([heightInner, 0]).nice();
-	var yScaleCDF = d3.scaleLinear()
-		//The domain of the CDF is (0, 1).
-		.domain([0, 1])
-		.range([heightInner, 0]).nice();
-		
-	//Define lines.
-	var linePDF = d3.line()
-    .x(function(d) { return xScale(d.x); })
-    .y(function(d) { return yScalePDF(d.pdf); });
-	var lineCDF = d3.line()
-    .x(function(d) { return xScale(d.x); })
-    .y(function(d) { return yScaleCDF(d.cdf); });
-	
-	//Add paths.
-  inner.append('path')
-      .data([theData]) //Notice that the argument is enclosed in square brackets.
-      .attr('class', 'line')
-      .attr('d', linePDF);
-  inner.append('path')
-      .data([theData])
-      .attr('class', 'line')
-      .attr('d', lineCDF);
-
-	//Add axes.
-	inner.append('g')
-		.call(d3.axisLeft(yScalePDF))
-		.attr('class', 'axis');
-	//In order for the translate to apply to the axis alone, and not to the entire 'inner' element, the axis must be placed within its own 'g' element.
-	inner.append('g')
-		.call(d3.axisRight(yScaleCDF))
-		.attr('class', 'axis')
-		.attr('transform', 'translate(' + widthInner + ', 0)');
-	inner.append('g')
-		.call(d3.axisBottom(xScale))
-		.attr('class', 'axis')
-		.attr('transform', 'translate(0, ' + heightInner + ')');
-	
-	//Add axis labels, title.
-	inner.append('text') //Left axis.
-		.attr('class', 'axis-label')
-		.text('Probability density')
-		//When an element has been rotated -90 degrees, translations along the x axis move the element up or down; translations along the y axis move it left or right.
-		.attr('transform', 'rotate(-90) translate(' + (-heightInner/2) + ',' + (-0.6 * margin.left) + ')');
-	inner.append('text') //Right axis.
-		.attr('class', 'axis-label')
-		.text('Probability')
-		.attr('transform', 'rotate(-90) translate('
-					+ (-heightInner/2) + ',' + (widthInner + 0.6 * margin.right) + ')');
-	inner.append('text') //Title.
-		.attr('class', 'title')
-		.text('Normal probability density & cumulative distribution functions')
-		.attr('transform', 'translate(' + (widthInner / 2) + ',' + (-0.6 * margin.top) + ')');
-	
-</script>
+	<body>
+		<svg height=600 width=800>
+			<!--For development purposes it can help to exhibit a rectangle congruent with the SVG element.
+			Following development it can be made invisible by setting its opacity to 0 in the relevant style.
+			-->
+			<rect id='boxOuter' height=600 width=800></rect>
+		</svg>
+		<div id='blurb'>
+			<p>The following are the goals of the present exerise:</p>
+			<ul>
+				<li>Plot two mathematical functions with different ranges.</li>
+				<li>Generate axes appropriate to each function.</li>
+				<li>Generate axis labels.</li>
+				<li>Produce legible tick labels.</li>
+			</ul>
+			<p>The chart is generated with <a href='https://d3js.org/' target="_blank">D3</a>. The Normal PDF and CDF are computed with <a href='https://github.com/jstat/jstat' target="_blank">jStat</a>.</p>
+			<p>You can view the code for this exercise on <a href='https://github.com/quantbo/Normal' target='_blank'>GitHub</a>.</p>
+		</div>
+	</body>
+	<script src="Normal.js"></script>
 </html>
