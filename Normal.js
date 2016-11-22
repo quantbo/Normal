@@ -54,7 +54,9 @@ inner.append('path')
 inner.append('path')
 		.data([theData])
 		.attr('class', 'line')
-		.attr('d', lineCDF);
+		.attr('d', lineCDF)
+		.style('stroke-dasharray', [5,3])
+		.style('stroke', 'rgb(0, 0, 128)');
 
 //Add axes.
 inner.append('g')
