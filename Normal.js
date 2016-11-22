@@ -1,7 +1,7 @@
 var svg = d3.select('svg');
 var height = svg.attr('height'), width = svg.attr('width');
 //Leave space for axes, axis labels, title.
-var margin = {top: Math.round(height * 0.10),
+var margin = {top: Math.round(height * 0.15),
 						 right: Math.round(width * 0.15),
 						 bottom: Math.round(height * 0.10),
 						 left: Math.round(width * 0.15)};
@@ -53,10 +53,33 @@ inner.append('path')
 		.attr('d', linePDF);
 inner.append('path')
 		.data([theData])
-		.attr('class', 'line')
-		.attr('d', lineCDF)
-		.style('stroke-dasharray', [5,3])
-		.style('stroke', 'rgb(0, 0, 128)');
+		.attr('class', 'line cdf') //The CDF gets additional styling.
+		.attr('d', lineCDF);
+
+//Legend.
+var Lfactor1 = -0.45, Lfactor2 = -0.25;
+inner.append('line')
+	.attr('x1', 0)
+	.attr('x2', 0.10 * widthInner)
+	.attr('y1', Lfactor1 * margin.top)
+	.attr('y2', Lfactor1 * margin.top)
+	.attr('class', 'line');
+inner.append('text')
+	.text('probability density function')
+	.attr('x', 0.11 * widthInner)
+	.attr('y', Lfactor1 * margin.top)
+	.attr('class', 'legend-text');
+inner.append('line')
+	.attr('x1', 0)
+	.attr('x2', 0.10 * widthInner)
+	.attr('y1', Lfactor2 * margin.top)
+	.attr('y2', Lfactor2 * margin.top)
+	.attr('class', 'line cdf');
+inner.append('text')
+	.text('cumulative distribution function')
+	.attr('x', 0.11 * widthInner)
+	.attr('y', Lfactor2 * margin.top)
+	.attr('class', 'legend-text');
 
 //Add axes.
 inner.append('g')
@@ -72,6 +95,16 @@ inner.append('g')
 	.attr('class', 'axis')
 	.attr('transform', 'translate(0, ' + heightInner + ')');
 
+//Add a mathematical y axis.
+inner.append('line')
+	.attr('x1', widthInner / 2)
+	.attr('x2', widthInner / 2)
+	.attr('y1', 0)
+	.attr('y2', heightInner)
+	.style('stroke', 'black')
+	.style('stroke-width', 'black')
+	.style('stroke-opacity', 0.66);
+
 //Add axis labels, title.
 inner.append('text') //Left axis.
 	.attr('class', 'axis-label')
@@ -86,4 +119,4 @@ inner.append('text') //Right axis.
 inner.append('text') //Title.
 	.attr('class', 'title')
 	.text('Normal probability density & cumulative distribution functions')
-	.attr('transform', 'translate(' + (widthInner / 2) + ',' + (-0.6 * margin.top) + ')');
+	.attr('transform', 'translate(' + (widthInner / 2) + ',' + (-0.8 * margin.top) + ')');

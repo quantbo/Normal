@@ -47,10 +47,19 @@ h1 {
 	font-size: 1.75em;
 	text-anchor: middle;
 }
+.legend-text {
+	dominant-baseline: middle;
+	font-family: sans-serif;
+	font-size: 0.9em;
+}
 .line {
 	fill: none;
 	stroke: black;
 	stroke-width: 2px;
+}
+.cdf { /* The CDF gets additional styling. */
+	stroke: rgb(0, 0, 128);
+	stroke-dasharray: 5,3;
 }
 .title {
 	font-family: sans-serif;
